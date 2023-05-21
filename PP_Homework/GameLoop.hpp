@@ -23,18 +23,7 @@ namespace MuSoeun
         virtual void Render(char* screenBuf, int width, int height) = 0;
     };
 
-    class Square : public Object {
-    public:
-        Square() {}
-        ~Square() {}
-
-        // 정사각형을 screenBuf에 x, y 좌표를 시작으로 저장
-        void Render(char* screenBuf, int width, int height) override {
-            for (int y = 0; y < 3; y++)
-                for (int x = 0; x < 3; x++)
-                    screenBuf[(width + 1) * (CoordY + y) + (CoordX + x)] = 'S';
-        }
-    };
+    
 
     class Rectangle : public Object {
     public:
@@ -122,21 +111,12 @@ namespace MuSoeun
         }
 
         void ObjectCreate() {
-            Square* obj1 = new Square();
-            obj1->CoordX = 3;
-            obj1->CoordY = 5;
 
-            Square* obj2 = new Square();
-            obj2->CoordX = 21;
-            obj2->CoordY = 12;
-
-            Rectangle* obj3 = new Rectangle();
-            obj3->CoordX = 33;
-            obj3->CoordY = 7;
+            Rectangle* obj1 = new Rectangle();
+            obj1->CoordX = 33;
+            obj1->CoordY = 7;
 
             objList.push_back(obj1);
-            objList.push_back(obj2);
-            objList.push_back(obj3);
         }
 
     public:
@@ -160,6 +140,10 @@ namespace MuSoeun
 
                 std::cout << ANSI_COLOR_RESET;
                 std::cin >> input;
+                if (_kbhit()) {
+                    if (_getch() == 'z') break;
+                }
+
 
                 switch (input[0]) {
                 case 'd':
