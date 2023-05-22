@@ -139,7 +139,19 @@ namespace MuSoeun
                 std::cout << ANSI_COLOR_CYAN "화면 초기화: R" << std::endl;
 
                 std::cout << ANSI_COLOR_RESET;
-                std::cin >> input;
+                if (_kbhit()) {
+                    switch (_getch()) {
+                    case 'd':
+                    case 'D':
+                        Draw();
+                        break;
+
+                    case 'r':
+                    case 'R':
+                        ClearScreenBuf();
+                        break;
+                    }
+                }
                 if (_kbhit()) {
                     if (_getch() == 'z') break;
                 }
